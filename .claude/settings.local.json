@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet-dump ps:*)",
+      "Bash(powershell -Command 'Add-Type -Path '\\\\''H.NotifyIcon.Wpf.dll'\\\\''; [System.AppDomain]::CurrentDomain.GetAssemblies\\(\\) | Where-Object { $_.GetName\\(\\).Name -eq '\\\\''H.NotifyIcon.Wpf'\\\\'' } | ForEach-Object { $_.GetTypes\\(\\) | Where-Object { $_.IsEnum } | Select-Object FullName }')",
+      "Bash(dotnet publish:*)"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11620.152 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightnessControl", "BrightnessControl.csproj", "{351E322E-8359-EACD-129C-259B95B85388}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{351E322E-8359-EACD-129C-259B95B85388}.Debug|x64.ActiveCfg = Debug|x64
+		{351E322E-8359-EACD-129C-259B95B85388}.Debug|x64.Build.0 = Debug|x64
+		{351E322E-8359-EACD-129C-259B95B85388}.Release|x64.ActiveCfg = Release|x64
+		{351E322E-8359-EACD-129C-259B95B85388}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28AD9D34-F507-432F-AF36-A52E0628A406}
+	EndGlobalSection
+EndGlobal
