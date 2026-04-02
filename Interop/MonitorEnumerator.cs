@@ -1,7 +1,7 @@
 using System.Management;
-using BrightnessControl.Models;
+using LumaTray.Models;
 
-namespace BrightnessControl.Interop;
+namespace LumaTray.Interop;
 
 /// <summary>
 /// Enumerates external monitors that support DDC/CI brightness control.

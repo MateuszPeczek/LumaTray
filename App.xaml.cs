@@ -1,7 +1,7 @@
 using System.Windows;
-using BrightnessControl.Services;
+using LumaTray.Services;
 
-namespace BrightnessControl;
+namespace LumaTray;
 
 public partial class App : Application
 {

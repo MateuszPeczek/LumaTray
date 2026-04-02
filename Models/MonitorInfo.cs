@@ -1,6 +1,6 @@
-using BrightnessControl.Interop;
+using LumaTray.Interop;
 
-namespace BrightnessControl.Models;
+namespace LumaTray.Models;
 
 internal sealed class MonitorInfo
 {

@@ -2,10 +2,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using BrightnessControl.Interop;
-using BrightnessControl.Models;
+using LumaTray.Interop;
+using LumaTray.Models;
 
-namespace BrightnessControl.Views;
+namespace LumaTray.Views;
 
 public partial class BrightnessPopup : Window
 {

@@ -1,4 +1,4 @@
-# BrightnessControl
+# LumaTray
 
 A lightweight Windows system tray application for controlling the brightness of external monitors connected to a laptop — without touching the physical buttons on the monitor.
 
@@ -23,7 +23,7 @@ Laptop users with external monitors typically have no convenient way to adjust d
 
 ## How to use
 
-1. Run `BrightnessControl.exe`
+1. Run `LumaTray.exe`
 2. A sun icon appears in the system tray
 3. Left-click the icon to open the brightness popup
 4. Adjust the slider for each detected external monitor

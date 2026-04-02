@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace BrightnessControl.Interop;
+namespace LumaTray.Interop;
 
 internal static class NativeMethods
 {

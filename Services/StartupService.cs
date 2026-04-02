@@ -1,11 +1,11 @@
 using System.IO;
 using Microsoft.Win32;
 
-namespace BrightnessControl.Services;
+namespace LumaTray.Services;
 
 internal static class StartupService
 {
-    private const string AppName = "BrightnessControl";
+    private const string AppName = "LumaTray";
     private const string RunKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
 
     private static string ExePath =>

@@ -2,11 +2,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows;
 using System.Windows.Controls;
-using BrightnessControl.Views;
+using LumaTray.Views;
 using H.NotifyIcon;
 using H.NotifyIcon.Core;
 
-namespace BrightnessControl.Services;
+namespace LumaTray.Services;
 
 internal sealed class TrayIconService : IDisposable
 {
@@ -19,7 +19,7 @@ internal sealed class TrayIconService : IDisposable
         _trayIcon = new TaskbarIcon
         {
             Icon = CreateSunIcon(),
-            ToolTipText = "Brightness Control",
+            ToolTipText = "LumaTray",
             MenuActivation = PopupActivationMode.RightClick,
             ContextMenu = BuildContextMenu(),
         };
