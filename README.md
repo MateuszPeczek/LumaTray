@@ -10,7 +10,7 @@ Grab the latest build from the [Releases](https://github.com/MateuszPeczek/LumaT
 
 ## Purpose
 
-Laptop users with external monitors typically have no convenient way to adjust display brightness from the OS. BrightnessControl sits in the system tray and exposes a clean slider per monitor, updated in real time via the DDC/CI protocol.
+Laptop users with external monitors typically have no convenient way to adjust display brightness from the OS. LumaTray sits in the system tray and exposes a clean slider per monitor, updated in real time via the DDC/CI protocol.
 
 ## Features
 
