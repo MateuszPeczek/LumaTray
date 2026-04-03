@@ -17,7 +17,7 @@ Laptop users with external monitors typically have no convenient way to adjust d
 - **System tray icon** — left-click opens the brightness popup, right-click shows the context menu
 - **Per-monitor sliders** — one slider per DDC/CI-capable external monitor with live percentage readout
 - **Global hotkeys** — adjust brightness of all monitors via customizable keyboard shortcuts (default: `Ctrl+Alt+Up` / `Ctrl+Alt+Down`)
-- **Hotkey configuration** — right-click → "Hotkey settings…" to record any key combination using Record/Stop buttons; works with standard keyboards, sim racing wheels (e.g. Moza rotary encoders), Stream Deck, and other peripherals
+- **Hotkey configuration** — right-click → "Hotkey settings…" to record any key combination using Record/Stop buttons; works with standard keyboards and other peripherals
 - **On-screen display** — a compact OSD overlay shows the current brightness level whenever a hotkey is pressed
 - **Live slider sync** — popup sliders update in real time when brightness is changed via hotkeys
 - **DDC/CI over Win32** — communicates directly with monitor firmware via `Dxva2.dll` (no third-party brightness drivers required)
@@ -52,10 +52,6 @@ If no monitors appear, make sure DDC/CI is enabled in your monitor's on-screen d
 6. Click **Save** to apply
 
 > **Note:** Windows requires at least one non-modifier key (e.g. arrow key, letter, F-key, or peripheral button). Modifier-only combos like `Ctrl + Alt` alone are not supported.
-
-### Using with sim racing wheels / peripherals
-
-Map your device's button or rotary encoder to the configured hotkey in your peripheral's software (e.g. Moza Pit House). The rotary encoder CW/CCW clicks will trigger brightness up/down.
 
 ## Tech stack
 
