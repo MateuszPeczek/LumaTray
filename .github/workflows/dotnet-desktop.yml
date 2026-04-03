@@ -39,7 +39,7 @@ jobs:
       run: dotnet build LumaTray.sln --configuration ${{ matrix.configuration }} --no-restore
 
     - name: Publish
-      run: dotnet publish LumaTray.csproj --configuration ${{ matrix.configuration }} --runtime win-x64 --self-contained false --output ./publish
+      run: dotnet publish LumaTray.csproj -p:PublishProfile=Properties/PublishProfiles/win-x64.pubxml --output ./publish
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
