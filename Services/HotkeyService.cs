@@ -16,6 +16,8 @@ internal sealed class HotkeyService : IDisposable
     private IntPtr _hwnd;
     private bool _registered;
 
+    internal bool IsRegistered => _registered;
+
     /// <summary>
     /// Invoked on the UI thread after brightness is stepped.
     /// Parameter is the average brightness percent across all monitors.
@@ -35,6 +37,9 @@ internal sealed class HotkeyService : IDisposable
         _settings = settings;
         Register();
     }
+
+    internal void Suspend() => Unregister();
+    internal void Resume() => Register();
 
     private void CreateMessageWindow()
     {

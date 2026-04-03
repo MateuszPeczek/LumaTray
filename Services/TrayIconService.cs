@@ -87,11 +87,23 @@ internal sealed class TrayIconService : IDisposable
 
     private void ShowHotkeyConfig()
     {
-        var current = HotkeySettings.Load();
-        var dialog = new HotkeyConfigWindow(current);
-        if (dialog.ShowDialog() == true && dialog.Result is { } newSettings)
+        // Suspend global hotkeys so they don't fire while recording new ones
+        _hotkeyService?.Suspend();
+        try
         {
-            _hotkeyService?.UpdateSettings(newSettings);
+            var current = HotkeySettings.Load();
+            var dialog = new HotkeyConfigWindow(current);
+            if (dialog.ShowDialog() == true && dialog.Result is { } newSettings)
+            {
+                _hotkeyService?.UpdateSettings(newSettings);
+                return; // UpdateSettings already re-registers
+            }
+        }
+        finally
+        {
+            // Re-register if the dialog was cancelled (UpdateSettings handles the save case)
+            if (_hotkeyService is { } svc && !svc.IsRegistered)
+                svc.Resume();
         }
     }
 

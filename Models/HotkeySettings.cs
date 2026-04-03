@@ -47,6 +47,14 @@ internal sealed class HotkeyBinding
         Key = key;
     }
 
+    [System.Text.Json.Serialization.JsonIgnore]
+    public bool HasNonModifierKey =>
+        Key is not (Key.LeftCtrl or Key.RightCtrl
+            or Key.LeftAlt or Key.RightAlt
+            or Key.LeftShift or Key.RightShift
+            or Key.LWin or Key.RWin
+            or Key.None);
+
     public string DisplayText =>
         string.IsNullOrEmpty(ModifierText)
             ? Key.ToString()

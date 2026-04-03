@@ -9,22 +9,49 @@
 
     <StackPanel Margin="20" Width="340">
         <TextBlock Text="Global Hotkeys" FontSize="16" FontWeight="SemiBold"
-                   Foreground="White" Margin="0,0,0,16"/>
+                   Foreground="White" Margin="0,0,0,4"/>
+        <TextBlock Text="Hotkeys are disabled while this window is open."
+                   Foreground="#888" FontSize="11" FontStyle="Italic" Margin="0,0,0,14"/>
 
         <!-- Brightness Up -->
         <TextBlock Text="Brightness Up" Foreground="#C8C8C8" FontSize="12" Margin="0,0,0,4"/>
-        <TextBox x:Name="BrightnessUpBox" IsReadOnly="True" FontSize="13"
-                 Height="32" Padding="6,4" Background="#2A2A2A" Foreground="White"
-                 BorderBrush="#444" CaretBrush="White"
-                 PreviewKeyDown="OnHotkeyKeyDown" GotFocus="OnHotkeyBoxFocus"
-                 LostFocus="OnHotkeyBoxLostFocus" Cursor="Hand"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="UpBorder" Height="32" Background="#2A2A2A" BorderBrush="#444"
+                    BorderThickness="1" CornerRadius="3"
+                    Focusable="True"
+                    PreviewKeyDown="OnHotkeyKeyDown" PreviewKeyUp="OnHotkeyKeyUp">
+                <TextBlock x:Name="BrightnessUpLabel" Foreground="White" FontSize="13"
+                           VerticalAlignment="Center" Margin="8,0" IsHitTestVisible="False"/>
+            </Border>
+            <Button x:Name="UpRecordBtn" Grid.Column="1" Content="Record" Width="60" Height="28"
+                    Margin="6,0,0,0" Click="OnRecordClick"
+                    Background="#333" Foreground="White" BorderBrush="#555"/>
+        </Grid>
 
         <TextBlock Text="Brightness Down" Foreground="#C8C8C8" FontSize="12" Margin="0,12,0,4"/>
-        <TextBox x:Name="BrightnessDownBox" IsReadOnly="True" FontSize="13"
-                 Height="32" Padding="6,4" Background="#2A2A2A" Foreground="White"
-                 BorderBrush="#444" CaretBrush="White"
-                 PreviewKeyDown="OnHotkeyKeyDown" GotFocus="OnHotkeyBoxFocus"
-                 LostFocus="OnHotkeyBoxLostFocus" Cursor="Hand"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="DownBorder" Height="32" Background="#2A2A2A" BorderBrush="#444"
+                    BorderThickness="1" CornerRadius="3"
+                    Focusable="True"
+                    PreviewKeyDown="OnHotkeyKeyDown" PreviewKeyUp="OnHotkeyKeyUp">
+                <TextBlock x:Name="BrightnessDownLabel" Foreground="White" FontSize="13"
+                           VerticalAlignment="Center" Margin="8,0" IsHitTestVisible="False"/>
+            </Border>
+            <Button x:Name="DownRecordBtn" Grid.Column="1" Content="Record" Width="60" Height="28"
+                    Margin="6,0,0,0" Click="OnRecordClick"
+                    Background="#333" Foreground="White" BorderBrush="#555"/>
+        </Grid>
+
+        <TextBlock x:Name="ValidationLabel" Foreground="#E05050" FontSize="11"
+                   TextWrapping="Wrap" Margin="0,8,0,0" Visibility="Collapsed"/>
 
         <!-- Step size -->
         <TextBlock Text="Step (%)" Foreground="#C8C8C8" FontSize="12" Margin="0,12,0,4"/>
