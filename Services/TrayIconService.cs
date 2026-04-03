@@ -2,6 +2,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows;
 using System.Windows.Controls;
+using LumaTray.Models;
 using LumaTray.Views;
 using H.NotifyIcon;
 using H.NotifyIcon.Core;
@@ -12,7 +13,9 @@ internal sealed class TrayIconService : IDisposable
 {
     private readonly TaskbarIcon _trayIcon;
     private BrightnessPopup? _popup;
+    private BrightnessOsd? _osd;
     private IntPtr _iconHandle;
+    private HotkeyService? _hotkeyService;
 
     internal TrayIconService()
     {
@@ -25,6 +28,20 @@ internal sealed class TrayIconService : IDisposable
         };
         _trayIcon.TrayLeftMouseDown += OnTrayLeftClick;
         _trayIcon.ForceCreate();
+
+        // Register global hotkeys from saved settings
+        var settings = HotkeySettings.Load();
+        _hotkeyService = new HotkeyService(settings);
+        _hotkeyService.BrightnessChanged += OnBrightnessChanged;
+    }
+
+    private void OnBrightnessChanged(int percent)
+    {
+        _osd ??= new BrightnessOsd();
+        _osd.ShowBrightness(percent);
+
+        // Keep the popup sliders in sync if visible
+        _popup?.RefreshSliderValues();
     }
 
     private void OnTrayLeftClick(object sender, RoutedEventArgs e)
@@ -51,6 +68,9 @@ internal sealed class TrayIconService : IDisposable
         };
         startupItem.Click += (_, _) => StartupService.SetEnabled(startupItem.IsChecked);
 
+        var hotkeyItem = new MenuItem { Header = "Hotkey settings..." };
+        hotkeyItem.Click += (_, _) => ShowHotkeyConfig();
+
         var exitItem = new MenuItem { Header = "Exit" };
         exitItem.Click += (_, _) =>
         {
@@ -59,9 +79,32 @@ internal sealed class TrayIconService : IDisposable
         };
 
         menu.Items.Add(startupItem);
+        menu.Items.Add(hotkeyItem);
         menu.Items.Add(new Separator());
         menu.Items.Add(exitItem);
         return menu;
+    }
+
+    private void ShowHotkeyConfig()
+    {
+        // Suspend global hotkeys so they don't fire while recording new ones
+        _hotkeyService?.Suspend();
+        try
+        {
+            var current = HotkeySettings.Load();
+            var dialog = new HotkeyConfigWindow(current);
+            if (dialog.ShowDialog() == true && dialog.Result is { } newSettings)
+            {
+                _hotkeyService?.UpdateSettings(newSettings);
+                return; // UpdateSettings already re-registers
+            }
+        }
+        finally
+        {
+            // Re-register if the dialog was cancelled (UpdateSettings handles the save case)
+            if (_hotkeyService is { } svc && !svc.IsRegistered)
+                svc.Resume();
+        }
     }
 
     private Icon CreateSunIcon()
@@ -99,6 +142,8 @@ internal sealed class TrayIconService : IDisposable
 
     public void Dispose()
     {
+        _hotkeyService?.Dispose();
+        _osd?.Close();
         _popup?.Close();
         _trayIcon.Dispose();
 

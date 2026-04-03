@@ -11,6 +11,8 @@ public partial class BrightnessPopup : Window
 {
     private List<MonitorInfo> _monitors = [];
     private DispatcherTimer? _debounce;
+    private readonly List<(MonitorInfo Monitor, Slider Slider, TextBlock Label)> _sliderBindings = [];
+    private bool _updatingFromExternal;
 
     public BrightnessPopup()
     {
@@ -34,6 +36,7 @@ public partial class BrightnessPopup : Window
     private void BuildControls()
     {
         MonitorsPanel.Children.Clear();
+        _sliderBindings.Clear();
 
         if (_monitors.Count == 0)
         {
@@ -119,6 +122,9 @@ public partial class BrightnessPopup : Window
             captured.CurrentBrightness = (uint)args.NewValue;
             percentLabel.Text = $"{captured.BrightnessPercent}%";
 
+            // Skip DDC write when the slider is being moved by an external hotkey update
+            if (_updatingFromExternal) return;
+
             _debounce?.Stop();
             _debounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(80) };
             _debounce.Tick += (_, _) =>
@@ -137,6 +143,36 @@ public partial class BrightnessPopup : Window
         row.Children.Add(percentLabel);
 
         MonitorsPanel.Children.Add(row);
+        _sliderBindings.Add((monitor, slider, percentLabel));
+    }
+
+    /// <summary>
+    /// Called from outside (e.g. hotkey service) to refresh sliders
+    /// with the current brightness values read from monitors.
+    /// </summary>
+    internal void RefreshSliderValues()
+    {
+        if (!IsVisible) return;
+
+        _updatingFromExternal = true;
+        try
+        {
+            foreach (var (monitor, slider, label) in _sliderBindings)
+            {
+                // Re-read current brightness from the physical monitor
+                if (NativeMethods.GetMonitorBrightness(
+                        monitor.PhysicalHandle, out _, out uint current, out _))
+                {
+                    monitor.CurrentBrightness = current;
+                    slider.Value = current;
+                    label.Text = $"{monitor.BrightnessPercent}%";
+                }
+            }
+        }
+        finally
+        {
+            _updatingFromExternal = false;
+        }
     }
 
     private void PositionAboveTray()
