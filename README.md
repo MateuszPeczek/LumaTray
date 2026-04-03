@@ -1,6 +1,6 @@
 # LumaTray
 
-![Build Status](https://github.com/MateuszPeczek/LumaTray/actions/workflows/dotnet-desktop.yml/badge.svg)
+![Build Status](https://github.com/MateuszPeczek/LumaTray/actions/workflows/dotnet-desktop.yml/badge.svg?branch=main)
 
 A lightweight Windows system tray application for controlling the brightness of external monitors connected to a laptop — without touching the physical buttons on the monitor.
 
